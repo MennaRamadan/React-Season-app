@@ -6,11 +6,14 @@
 //state must to be initialized when component created
 //to be able to update state >> using setState function
 //handling the error
+//taking state of one component and pass it as props for another component
+//Lifecycles
 
 
 
 import React from 'react';
 import ReactDom from 'react-dom';
+import SeasonDisplay from './seasonDisplay';
 
 //reason to extends React.Component is to be able to use functions, bowwowing functionality into our app from React.Component
 class App extends React.Component{
@@ -24,6 +27,12 @@ class App extends React.Component{
 
         //this is the only time to assign value to state other cases is to use setState
         this.state = { lat: null, errorMessage: "" };
+
+    }
+    //another way for initialization
+    //state = {lat: null , errorMessage : ""};
+
+    componentDidMount(){
         window.navigator.geolocation.getCurrentPosition(
             (position) => {
                 this.setState({ lat: position.coords.latitude })
@@ -41,7 +50,7 @@ class App extends React.Component{
             return (<div>Error: {this.state.errorMessage}</div>)
         }
         if(this.state.lat && !this.state.errorMessage){
-            return (<div>latitude: {this.state.lat}</div>)
+            return <SeasonDisplay lat={this.state.lat}/>
         }
          return (<div>Loading!</div>)
     }
