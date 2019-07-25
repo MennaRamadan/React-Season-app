@@ -1,5 +1,7 @@
 import './seasonDisplay.css';
 import React from 'react';
+import Clock from './clock';
+
 
 const seasonConfig = {
     summer: {
@@ -27,9 +29,12 @@ const SeasonDisplay = (props) => {
     const { text, iconName } = seasonConfig[season];
 
     return (
+        
+
         <div className={`season-display ${season}`}>
             <i className={`icon-left massive ${iconName} icon`}></i>
             <h1>{text}</h1>
+            <h3><Clock /></h3>
             <i className={`icon-right massive ${iconName} icon`}></i>
         </div>
     );
