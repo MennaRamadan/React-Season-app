@@ -8,12 +8,16 @@
 //handling the error
 //taking state of one component and pass it as props for another component
 //Lifecycles
+//addding style to component
+//adding spinner component
+//defaultprops if we decide not to pass the props value
 
 
 
 import React from 'react';
 import ReactDom from 'react-dom';
 import SeasonDisplay from './seasonDisplay';
+import Spinner from './spinner';
 
 //reason to extends React.Component is to be able to use functions, bowwowing functionality into our app from React.Component
 class App extends React.Component{
@@ -43,8 +47,7 @@ class App extends React.Component{
         );
     }
 
-    //React says we want to define render
-    render(){
+    renderContent(){
         if(this.state.errorMessage && !this.state.lat)
         {
             return (<div>Error: {this.state.errorMessage}</div>)
@@ -52,7 +55,15 @@ class App extends React.Component{
         if(this.state.lat && !this.state.errorMessage){
             return <SeasonDisplay lat={this.state.lat}/>
         }
-         return (<div>Loading!</div>)
+         return <Spinner message="Please Accept Location Request"/>
+    }
+
+    //React says we want to define render
+    render(){
+        //we do this as sometimes we need to wrap html components with conditions in one wrapper
+       return(<div className="border red">
+                {this.renderContent()}
+             </div>)
     }
 }
 
